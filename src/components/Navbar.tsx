@@ -3,10 +3,15 @@ import {Layout, Menu, Row} from "antd";
 import {useHistory} from 'react-router-dom'
 import {RouteNames} from "../roures";
 import {useTypedSelector} from "../hooks/useTypedSelector";
+import {AuthActionCreators} from "../store/reducers/auth/action-creators";
+import {useDispatch} from "react-redux";
+import {useActions} from "../hooks/UseActions";
 
 const Navbar: FC = () => {
+    const dispatch = useDispatch()
     const router = useHistory()
-    const isAuth = useTypedSelector(state => state.auth.isAuth)
+    const {isAuth, user} = useTypedSelector(state => state.auth)
+    const {logout} = useActions()
     return (
         <Layout.Header>
             <Row justify="end">
@@ -15,12 +20,12 @@ const Navbar: FC = () => {
                         ?
                         <>
                             <div style={{color: 'white'}}>
-                                MiddleTest
+                                {user.username}
                             </div>
                             <Menu theme="dark" selectable={false} mode="horizontal">
                                 <Menu.Item
                                     key={1}
-                                    onClick={() => console.log('выйти')}
+                                    onClick={logout}
                                 >
                                     Выйти
                                 </Menu.Item>
