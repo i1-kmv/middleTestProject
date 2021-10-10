@@ -3,7 +3,7 @@ import {IEvent} from "../../../models/IEvent";
 
 
 export interface EventState {
-    quests: IUser[];
+    guests: IUser[];
     events: IEvent[];
 }
 
